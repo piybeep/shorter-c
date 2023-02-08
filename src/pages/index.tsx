@@ -35,6 +35,7 @@ export default function Home() {
 
 	const onReCAPTCHAChange = (captchaCode: any) => {
 		if (!captchaCode) {
+			setErrorMessage("Вы не решили капчу");
 			return;
 		}
 		send(userInput);
@@ -53,6 +54,7 @@ export default function Home() {
 				/>
 				<form className="user_input" onSubmit={handleSubmit}>
 					<ReCAPTCHA
+						theme="dark"
 						ref={recaptchaRef}
 						size="invisible"
 						sitekey={
