@@ -1,0 +1,35 @@
+.user_output {
+	display: flex;
+	flex-direction: column;
+	row-gap: 1rem;
+	align-items: center;
+
+	span {
+		position: relative;
+		cursor: pointer;
+
+		&:hover {
+			samp,
+			svg path {
+				fill: #98ec65;
+				color: #98ec65;
+			}
+		}
+		samp {
+			width: fit-content;
+			padding: 3px 6px;
+			border-radius: 6px;
+			background: #232328;
+		}
+		svg {
+			position: absolute;
+			right: -1.5rem;
+			top: 50%;
+			transform: translateY(-50%);
+
+			path {
+				fill: #ececec;
+			}
+		}
+	}
+}

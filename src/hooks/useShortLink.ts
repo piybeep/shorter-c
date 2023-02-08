@@ -12,6 +12,7 @@ export function useShortLink() {
 	const [isLoading, setIsLoading] = React.useState(false);
 
 	const send = (link: string) => {
+		setData(null);
 		setIsLoading(true);
 		axios
 			// 	.post("", { link })
