@@ -4,6 +4,8 @@ import { Toaster } from "react-hot-toast";
 import { useShortLink } from "@/hooks";
 import { TextInput, Button, ErrorView } from "@/components";
 import Resultat from "@/modules/Resultat";
+import { FooterModule } from "@/modules/Footer";
+import { HeaderModule } from "@/modules/Header";
 
 export default function Home() {
 	const { send, data, isLoading, error } = useShortLink();
@@ -32,7 +34,7 @@ export default function Home() {
 
 	return (
 		<>
-			<header>Сокращение ссылок</header>
+			<HeaderModule />
 			<main>
 				<Toaster
 					position="bottom-center"
@@ -60,7 +62,7 @@ export default function Home() {
 				<ErrorView error={errorMessage} />
 				<Resultat isLoading={isLoading} response={data} />
 			</main>
-			<footer>2023 danyatochkaru</footer>
+			<FooterModule />
 		</>
 	);
 }

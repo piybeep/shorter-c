@@ -11,7 +11,7 @@ export async function getServerSideProps(context: any) {
 	if (context.query.code) {
 		const { res } = context;
 
-		res.writeHead(301, {
+		res.writeHead(302, {
 			Location: `https://clck.ru/${context.query.code}`,
 		});
 		res.end();
