@@ -4,13 +4,22 @@ import s from "./Resultat.module.scss";
 import { API_URL } from "@/constants";
 import { ResultatProps } from "./Resultat.types";
 import classNames from "classnames";
+import React from "react";
 
 export function ResultatModule({
 	response,
 	isLoading,
 	...props
 }: ResultatProps) {
+	const [link, setLink] = React.useState("");
 	const data = response?.data;
+
+	React.useEffect(() => {
+		if (data)
+			setLink(
+				`${API_URL}/l/${data.split("/")[data.split("/").length - 1]}`
+			);
+	}, [data]);
 
 	if (isLoading) return <p>Готовим короткую ссылку...</p>;
 
@@ -22,9 +31,7 @@ export function ResultatModule({
 			<span
 				onClick={() => {
 					navigator.clipboard
-						.writeText(
-							`${API_URL}/l/${data.split("/")[data.split("/").length - 1]}`,
-						)
+						.writeText(link)
 						.then(() => toast.success("Копирование прошло успешно"))
 						.catch((err) => {
 							toast.error("Копирование не удалось");
@@ -32,10 +39,7 @@ export function ResultatModule({
 						});
 				}}
 			>
-				<samp>
-					{API_URL}/l/
-					{data.split("/")[data.split("/").length - 1]}
-				</samp>
+				<samp>{link}</samp>
 				<svg
 					width="14"
 					height="14"
