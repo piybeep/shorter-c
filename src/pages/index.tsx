@@ -1,5 +1,6 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import { useShortLink } from "@/hooks";
 import { TextInput, Button, ErrorView } from "@/components";
@@ -11,15 +12,15 @@ export default function Home() {
 	const { send, data, isLoading, error } = useShortLink();
 	const [errorMessage, setErrorMessage] = React.useState("");
 	const [userInput, setUserInput] = React.useState("");
+	const recaptchaRef = React.createRef<any>();
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-
 		if (userInput.trim() == "") {
 			return setErrorMessage("Вы не ввели ссылку");
 		}
 
-		send(userInput);
+		recaptchaRef.current.execute();
 	};
 
 	React.useEffect(() => {
@@ -32,6 +33,14 @@ export default function Home() {
 		}
 	}, [error]);
 
+	const onReCAPTCHAChange = (captchaCode: any) => {
+		if (!captchaCode) {
+			return;
+		}
+		send(userInput);
+		recaptchaRef?.current.reset();
+	};
+
 	return (
 		<>
 			<HeaderModule />
@@ -43,6 +52,14 @@ export default function Home() {
 					}}
 				/>
 				<form className="user_input" onSubmit={handleSubmit}>
+					<ReCAPTCHA
+						ref={recaptchaRef}
+						size="invisible"
+						sitekey={
+							process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
+						}
+						onChange={onReCAPTCHAChange}
+					/>
 					<TextInput
 						error={errorMessage}
 						onChange={(data) => {
