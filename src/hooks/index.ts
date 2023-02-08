@@ -1,0 +1,1 @@
+export { useShortLink } from "./useShortLink";

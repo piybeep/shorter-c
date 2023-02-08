@@ -1,0 +1,20 @@
+.btn {
+	cursor: pointer;
+	color: #ececec;
+	background: transparent;
+	border: 1px solid #98ec65;
+	border-radius: 10px;
+	padding: 10px 20px;
+
+	font-family: inherit;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 19px;
+
+	transition: all 0.2s;
+
+	&:hover {
+		background: #98ec65;
+		color: #100f13;
+	}
+}
