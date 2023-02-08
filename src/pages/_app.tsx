@@ -2,6 +2,7 @@ import "@/styles/globals.scss";
 import type { AppProps } from "next/app";
 import { Source_Code_Pro } from "@next/font/google";
 import Head from "next/head";
+import Script from "next/script";
 
 const rootFont = Source_Code_Pro({
 	weight: ["400"],
@@ -23,7 +24,19 @@ export default function App({ Component, pageProps }: AppProps) {
 				/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+
+			{/* <!-- Google tag (gtag.js) --> */}
+			<Script
+				src="https://www.googletagmanager.com/gtag/js?id=G-8C357W52ZD"
+				strategy="afterInteractive"
+			/>
+
+			<Script id="google-analytics" strategy="afterInteractive">
+				{`window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-8C357W52ZD');`}
+			</Script>
+
 			<Component {...pageProps} />
+
 			<style jsx global>{`
 				* {
 					font-family: ${rootFont.style.fontFamily};
