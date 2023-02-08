@@ -41,7 +41,10 @@ main {
 	padding: 0 1rem;
 
 	.user_input {
+		width: 100%;
 		display: flex;
+		justify-content: center;
+		align-items: center;
 		gap: 1rem;
 	}
 }
@@ -50,7 +53,6 @@ main {
 	main {
 		.user_input {
 			flex-direction: column;
-			align-items: center;
 		}
 	}
 }
