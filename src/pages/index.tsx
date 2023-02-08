@@ -1,10 +1,8 @@
 import React from "react";
-import Head from "next/head";
-import { useShortLink } from "@/hooks";
-import TextInput from "@/components/TextInput";
-import Button from "@/components/Button";
 import { Toaster } from "react-hot-toast";
-import ErrorView from "@/components/ErrorView";
+
+import { useShortLink } from "@/hooks";
+import { TextInput, Button, ErrorView } from "@/components";
 import Resultat from "@/modules/Resultat";
 
 export default function Home() {
@@ -34,12 +32,6 @@ export default function Home() {
 
 	return (
 		<>
-			<Head>
-				<title>Сокращение ссылок</title>
-				<meta name="description" content="Link Shortening by danyatochkaru" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="icon" href="/favicon.svg" />
-			</Head>
 			<header>Сокращение ссылок</header>
 			<main>
 				<Toaster
@@ -59,7 +51,11 @@ export default function Home() {
 						value={userInput}
 						placeholder="Вставьте вашу ссылку сюда"
 					/>
-					<Button type="submit" value="Сократить" disabled={isLoading} />
+					<Button
+						type="submit"
+						value="Сократить"
+						disabled={isLoading}
+					/>
 				</form>
 				<ErrorView error={errorMessage} />
 				<Resultat isLoading={isLoading} response={data} />
