@@ -46,22 +46,7 @@ export default function Home() {
 		<>
 			<HeaderModule />
 			<main>
-				<Toaster
-					position="bottom-center"
-					toastOptions={{
-						style: { color: "#ececec", background: "#323237" },
-					}}
-				/>
 				<form className="user_input" onSubmit={handleSubmit}>
-					<ReCAPTCHA
-						theme="dark"
-						ref={recaptchaRef}
-						size="invisible"
-						sitekey={
-							process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
-						}
-						onChange={onReCAPTCHAChange}
-					/>
 					<TextInput
 						error={errorMessage}
 						onChange={(data) => {
@@ -82,6 +67,21 @@ export default function Home() {
 				<Resultat isLoading={isLoading} response={data} />
 			</main>
 			<FooterModule />
+
+			{/* Модальные окна */}
+			<Toaster
+				position="bottom-center"
+				toastOptions={{
+					style: { color: "#ececec", background: "#323237" },
+				}}
+			/>
+			<ReCAPTCHA
+				theme="dark"
+				ref={recaptchaRef}
+				size="invisible"
+				sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+				onChange={onReCAPTCHAChange}
+			/>
 		</>
 	);
 }
