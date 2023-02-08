@@ -4,14 +4,16 @@ import React from "react";
 export default function RedirectPage({ code }: { code: string }) {
 	Router.replace(`https://clck.ru/${code}`);
 
-	return <>Redirecting...</>;
+	return <p>Redirecting...</p>;
 }
 
 export async function getServerSideProps(context: any) {
 	if (context.query.code) {
 		const { res } = context;
 
-		res.writeHead(301, { Location: `https://clck.ru/${context.query.code}` });
+		res.writeHead(301, {
+			Location: `https://clck.ru/${context.query.code}`,
+		});
 		res.end();
 	}
 
