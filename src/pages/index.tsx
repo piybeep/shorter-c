@@ -5,7 +5,6 @@ import { Source_Code_Pro } from "@next/font/google";
 import { useShortLink } from "@/hooks";
 import TextInput from "@/components/TextInput";
 import Button from "@/components/Button";
-// import  from "@/components";
 
 const rootFont = Source_Code_Pro({
 	subsets: ["cyrillic", "latin"],
@@ -20,6 +19,10 @@ export default function Home() {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
+
+		if (userInput.trim() == "") {
+			return setErrorMessage("Вы не ввели ссылку");
+		}
 
 		send(userInput);
 	};
@@ -38,32 +41,24 @@ export default function Home() {
 		<>
 			<Head>
 				<title>Сокращение ссылок</title>
-				<meta
-					name="description"
-					content="Link Shortening by danyatochkaru"
-				/>
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1"
-				/>
+				<meta name="description" content="Link Shortening by danyatochkaru" />
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.svg" />
 			</Head>
 			<header className={rootFont.className}>Сокращение ссылок</header>
 			<main className={rootFont.className}>
 				<form className="user_input" onSubmit={handleSubmit}>
 					<TextInput
+						error={errorMessage}
 						onChange={(data) => {
 							setUserInput(data.target.value);
 							setErrorMessage("");
 						}}
+						onBlur={() => setErrorMessage("")}
 						value={userInput}
 						placeholder="Вставьте вашу ссылку сюда"
 					/>
-					<Button
-						type="submit"
-						value="Сократить"
-						disabled={isLoading}
-					/>
+					<Button type="submit" value="Сократить" disabled={isLoading} />
 				</form>
 				<span
 					className={classNames("error_text", {
@@ -75,10 +70,7 @@ export default function Home() {
 				<div className="user_output">
 					{data ? (
 						<>
-							<p>
-								Ваша ссылка готова! Нажмите на неё, чтобы
-								скопировать
-							</p>
+							<p>Ваша ссылка готова! Нажмите на неё, чтобы скопировать</p>
 							<span>
 								<samp>{data.data.short_link}</samp>
 								<svg
