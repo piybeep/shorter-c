@@ -16,10 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
 		<>
 			<Head>
 				<title>Сокращение ссылок</title>
-				<meta
-					name="description"
-					content="Link Shortening by danyatochkaru"
-				/>
+				<meta name="description" content="Сервис сокращения ссылок" />
 				<meta
 					name="viewport"
 					content="width=device-width, initial-scale=1"
