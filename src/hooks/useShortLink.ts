@@ -2,9 +2,10 @@ import React from "react";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 export function useShortLink() {
-	const [data, setData] = React.useState<AxiosResponse<{
-		short_link: string;
-	}> | null>(null);
+	const [data, setData] = React.useState<AxiosResponse<// | {
+	// 		short_link: string;
+	//   }
+	string> | null>(null);
 	const [error, setError] = React.useState<AxiosError<{
 		message: string;
 	}> | null>(null);
@@ -13,7 +14,8 @@ export function useShortLink() {
 	const send = (link: string) => {
 		setIsLoading(true);
 		axios
-			.post("", { link })
+			// 	.post("", { link })
+			.get(`https://clck.ru/--?url=${link}`)
 			.then((response) => setData(response))
 			.catch((error) => setError(error))
 			.finally(() => setIsLoading(false));

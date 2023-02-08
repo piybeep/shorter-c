@@ -1,16 +1,14 @@
 import React from "react";
 import Head from "next/head";
 import classNames from "classnames";
-import { Source_Code_Pro } from "@next/font/google";
 import { useShortLink } from "@/hooks";
 import TextInput from "@/components/TextInput";
 import Button from "@/components/Button";
+import toast, { Toaster } from "react-hot-toast";
 
-const rootFont = Source_Code_Pro({
-	subsets: ["cyrillic", "latin"],
-	fallback: ["sans-serif"],
-	adjustFontFallback: false,
-});
+
+
+const BASE_URL = "http://localhost:3000"; // https://shrt.piybeep.com
 
 export default function Home() {
 	const { send, data, isLoading, error } = useShortLink();
@@ -45,8 +43,14 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.svg" />
 			</Head>
-			<header className={rootFont.className}>Сокращение ссылок</header>
-			<main className={rootFont.className}>
+			<header>Сокращение ссылок</header>
+			<main>
+				<Toaster
+					position="bottom-center"
+					toastOptions={{
+						style: { color: "#ececec", background: "#323237" },
+					}}
+				/>
 				<form className="user_input" onSubmit={handleSubmit}>
 					<TextInput
 						error={errorMessage}
@@ -71,8 +75,25 @@ export default function Home() {
 					{data ? (
 						<>
 							<p>Ваша ссылка готова! Нажмите на неё, чтобы скопировать</p>
-							<span>
-								<samp>{data.data.short_link}</samp>
+							<span
+								onClick={() => {
+									navigator.clipboard
+										.writeText(
+											`${BASE_URL}/l/${
+												data.data.split("/")[data.data.split("/").length - 1]
+											}`,
+										)
+										.then(() => toast.success("Копирование прошло успешно"))
+										.catch((err) => {
+											toast.error("Копирование не удалось");
+											console.error(err);
+										});
+								}}
+							>
+								<samp>
+									{BASE_URL}/l/
+									{data.data.split("/")[data.data.split("/").length - 1]}
+								</samp>
 								<svg
 									width="14"
 									height="14"
@@ -88,7 +109,7 @@ export default function Home() {
 					)}
 				</div>
 			</main>
-			<footer className={rootFont.className}>2023 danyatochkaru</footer>
+			<footer>2023 danyatochkaru</footer>
 		</>
 	);
 }
