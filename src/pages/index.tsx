@@ -5,10 +5,7 @@ import { useShortLink } from "@/hooks";
 import TextInput from "@/components/TextInput";
 import Button from "@/components/Button";
 import toast, { Toaster } from "react-hot-toast";
-
-
-
-const BASE_URL = "http://localhost:3000"; // https://shrt.piybeep.com
+import { API_URL } from "@/constants";
 
 export default function Home() {
 	const { send, data, isLoading, error } = useShortLink();
@@ -79,7 +76,7 @@ export default function Home() {
 								onClick={() => {
 									navigator.clipboard
 										.writeText(
-											`${BASE_URL}/l/${
+											`${API_URL}/l/${
 												data.data.split("/")[data.data.split("/").length - 1]
 											}`,
 										)
@@ -91,7 +88,7 @@ export default function Home() {
 								}}
 							>
 								<samp>
-									{BASE_URL}/l/
+									{API_URL}/l/
 									{data.data.split("/")[data.data.split("/").length - 1]}
 								</samp>
 								<svg
