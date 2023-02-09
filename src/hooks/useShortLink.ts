@@ -14,7 +14,7 @@ export function useShortLink() {
 		setData(null);
 		setIsLoading(true);
 		axios
-			.post("http://localhost:3085/api/tokens", { url })
+			.post("https://shrt.piybeep.com/api/tokens", { url })
 			// .get(`https://clck.ru/--?url=${link}`)
 			.then((response) => setData(response))
 			.catch((error) => setError(error))

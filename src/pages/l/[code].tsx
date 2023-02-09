@@ -8,7 +8,7 @@ export default function RedirectPage({ code }: { code: string }) {
 	const [error, setError] = React.useState("");
 	React.useEffect(() => {
 		axios
-			.get(`http://localhost:3085/api/tokens/${code}`)
+			.get(`https://shrt.piybeep.com/api/tokens/${code}`)
 			.then((response) => {
 				Router.replace(
 					response.data?.url.startsWith("http")
@@ -51,7 +51,7 @@ export async function getServerSideProps(context: any) {
 	if (context.query.code) {
 		try {
 			const response = await axios.get(
-				`http://localhost:3085/api/tokens/${context.query.code}`
+				`https://shrt.piybeep.com/api/tokens/${context.query.code}`
 			);
 			if (response.data?.url) {
 				res.writeHead(302, {
