@@ -1,7 +1,7 @@
 FROM node:lts-alpine as dependencies
 WORKDIR /web
 COPY package.json yarn.lock ./
-RUN yarn
+RUN yarn install -s
 
 FROM node:lts-alpine as builder
 WORKDIR /web

@@ -15,9 +15,9 @@ export function ResultatModule({
 	const data = response?.data;
 
 	React.useEffect(() => {
-		if (data)
+		if (data?.token)
 			setLink(
-				`${API_URL}/l/${data.split("/")[data.split("/").length - 1]}`
+				`${API_URL}/l/${data.token.split("/")[data.token.split("/").length - 1]}`
 			);
 	}, [data]);
 

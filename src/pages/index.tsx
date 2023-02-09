@@ -20,6 +20,8 @@ export default function Home() {
 			return setErrorMessage("Вы не ввели ссылку");
 		}
 
+		send(userInput);
+
 		recaptchaRef.current.execute();
 	};
 
@@ -61,17 +63,21 @@ export default function Home() {
 						theme="dark"
 						ref={recaptchaRef}
 						size="invisible"
-						sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+						sitekey={
+							process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
+						}
 						onChange={onReCAPTCHAChange}
 					/>
-					<Button type="submit" value="Сократить" disabled={isLoading} />
+					<Button
+						type="submit"
+						value="Сократить"
+						disabled={isLoading}
+					/>
 				</form>
 				<ErrorView error={errorMessage} />
 				<Resultat isLoading={isLoading} response={data} />
 			</main>
 			<FooterModule />
-
-			{/* Модальные окна */}
 			<Toaster
 				position="bottom-center"
 				toastOptions={{
