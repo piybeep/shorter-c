@@ -1,7 +1,7 @@
 FROM node:lts-alpine as dependencies
 WORKDIR /web
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN yarn
 
 FROM node:lts-alpine as builder
 WORKDIR /web
