@@ -20,8 +20,6 @@ export default function Home() {
 			return setErrorMessage("Вы не ввели ссылку");
 		}
 
-		send(userInput);
-
 		recaptchaRef.current.execute();
 	};
 
