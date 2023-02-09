@@ -57,11 +57,14 @@ export default function Home() {
 						value={userInput}
 						placeholder="Вставьте вашу ссылку сюда"
 					/>
-					<Button
-						type="submit"
-						value="Сократить"
-						disabled={isLoading}
+					<ReCAPTCHA
+						theme="dark"
+						ref={recaptchaRef}
+						size="invisible"
+						sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+						onChange={onReCAPTCHAChange}
 					/>
+					<Button type="submit" value="Сократить" disabled={isLoading} />
 				</form>
 				<ErrorView error={errorMessage} />
 				<Resultat isLoading={isLoading} response={data} />
@@ -74,13 +77,6 @@ export default function Home() {
 				toastOptions={{
 					style: { color: "#ececec", background: "#323237" },
 				}}
-			/>
-			<ReCAPTCHA
-				theme="dark"
-				ref={recaptchaRef}
-				size="invisible"
-				sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
-				onChange={onReCAPTCHAChange}
 			/>
 		</>
 	);
