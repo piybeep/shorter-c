@@ -6,7 +6,7 @@
 	color: #ececec;
 	background: transparent;
 	border: 1px solid #98ec65;
-	border-radius: 10px;
+	border-radius: 6px;
 	padding: 10px 20px;
 
 	font-family: inherit;
@@ -16,8 +16,19 @@
 
 	transition: all 0.2s;
 
-	&:hover {
+	&:hover:not(&:disabled) {
+		color: #98ec65;
+		border-radius: 10px;
+	}
+
+	&:active:not(&:disabled) {
 		background: #98ec65;
+		border-radius: 10px;
 		color: #100f13;
+	}
+
+	&:disabled {
+		color: #ececec;
+		cursor: not-allowed;
 	}
 }

@@ -1,10 +1,10 @@
 import "@/styles/globals.scss";
 import type { AppProps } from "next/app";
-import { Source_Code_Pro } from "@next/font/google";
+import { Inter } from "@next/font/google";
 import Head from "next/head";
 import Script from "next/script";
 
-const rootFont = Source_Code_Pro({
+const rootFont = Inter({
 	weight: ["400"],
 	subsets: ["cyrillic", "latin"],
 	fallback: ["sans-serif"],
@@ -18,10 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			<Head>
 				<title>Сокращение ссылок</title>
 				<meta name="description" content="Сервис сокращения ссылок" />
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1"
-				/>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
