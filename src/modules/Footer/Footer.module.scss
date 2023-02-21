@@ -1,7 +1,17 @@
+@import "../../styles/variables.scss";
+
 .footer {
 	padding: 0 1rem;
 	text-align: center;
 	font-size: 14px;
 	margin: 2rem auto;
 	cursor: default;
+
+	a {
+		outline: none;
+
+		&:focus-visible {
+			color: $color-primary;
+		}
+	}
 }

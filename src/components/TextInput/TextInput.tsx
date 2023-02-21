@@ -1,18 +1,25 @@
 import classNames from "classnames";
-import { ComponentProps } from "react";
 import s from "./Input.module.scss";
+import { TextInputProps } from "./TextInput.types";
 
 export function TextInput({
 	error,
+	label,
+	type = "default",
+	htmlType = "text",
 	...props
-}: ComponentProps<"input"> & { error?: any }) {
+}: TextInputProps) {
 	return (
-		<input
-			className={classNames(s.text_input, props.className, {
-				[s.text_input__error]: error,
-			})}
-			type="text"
-			{...props}
-		/>
+		<div className={classNames(s.text_input, props.className)}>
+			{label ? <label htmlFor={label}>{label}</label> : ""}
+			<input
+				id={label}
+				className={classNames(s[type], {
+					[s.text_input__error]: error,
+				})}
+				type={htmlType}
+				{...props}
+			/>
+		</div>
 	);
 }

@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .user_output {
 	display: flex;
 	flex-direction: column;
@@ -7,13 +9,13 @@
 
 	span {
 		position: relative;
-		cursor: pointer;
+		cursor: copy;
 
 		&:hover {
 			samp,
 			svg path {
-				fill: #98ec65;
-				color: #98ec65;
+				fill: $color-primary;
+				color: $color-primary;
 			}
 		}
 		samp {
@@ -29,7 +31,7 @@
 			transform: translateY(-50%);
 
 			path {
-				fill: #ececec;
+				fill: $color-white;
 			}
 		}
 	}

@@ -41,6 +41,23 @@ export default function Home() {
 		send(userInput);
 		recaptchaRef?.current.reset();
 	};
+	const optionButtons = [
+		{
+			label: "Время жизни",
+			type: "dropdown",
+			default: "Не ограничено",
+		},
+		{
+			label: "Переходы",
+			type: "dropdown",
+			default: "Сколько угодно",
+		},
+		{
+			label: "Ссылка с паролем",
+			type: "text",
+			placeholder: "Введите пароль",
+		},
+	];
 
 	return (
 		<>
@@ -51,20 +68,58 @@ export default function Home() {
 						theme="dark"
 						ref={recaptchaRef}
 						size="invisible"
-						sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+						sitekey={
+							process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
+						}
 						onChange={onReCAPTCHAChange}
 					/>
-					<TextInput
-						error={errorMessage}
-						onChange={(data) => {
-							setUserInput(data.target.value);
-							setErrorMessage("");
-						}}
-						onBlur={() => setErrorMessage("")}
-						value={userInput}
-						placeholder="Вставьте вашу ссылку сюда"
-					/>
-					<Button type="submit" value="Сократить" disabled={isLoading} />
+					<div className="form_row">
+						<TextInput
+							error={errorMessage}
+							onChange={(data) => {
+								setUserInput(data.target.value);
+								setErrorMessage("");
+							}}
+							onBlur={() => setErrorMessage("")}
+							value={userInput}
+							htmlType="url"
+							placeholder="Вставьте вашу ссылку сюда"
+						/>
+						<Button
+							type="submit"
+							value="Сократить"
+							disabled={isLoading}
+						/>
+					</div>
+					<div className="form_row form_options">
+						{optionButtons.map((btn) => {
+							switch (btn.type) {
+								case "text": {
+									return (
+										<TextInput
+											label={btn.label}
+											htmlType="text"
+											placeholder={btn.placeholder}
+											type="small"
+										/>
+									);
+								}
+								case "dropdown": {
+									return (
+										<TextInput
+											label={btn.label}
+											htmlType="text"
+											placeholder={btn.default}
+											type="small"
+										/>
+									);
+								}
+								default: {
+									return <></>;
+								}
+							}
+						})}
+					</div>
 				</form>
 				<ErrorView error={errorMessage} />
 				<Resultat isLoading={isLoading} response={data} />
