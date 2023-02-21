@@ -65,6 +65,16 @@
 			transform: translateY(-70%);
 			background: transparent;
 			border: none;
+			.arrow_icon {
+				transition: all 0.2s;
+
+				&__active {
+					transform: rotateX(180deg);
+					path {
+						stroke: #d3d3d3;
+					}
+				}
+			}
 		}
 	}
 

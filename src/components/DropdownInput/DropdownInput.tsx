@@ -76,11 +76,30 @@ export function DropdownInput({
 				</span>
 			)}
 			<button type="button" disabled>
-				{expanded ? (
+				<svg
+					className={classNames(s.arrow_icon, {
+						[s.arrow_icon__active]: expanded,
+					})}
+					width="10"
+					height="7"
+					viewBox="0 0 10 7"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M1.33325 1.5L5.33325 5.5L9.33325 1.5"
+						stroke="#909090"
+						stroke-width="1.3"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+				</svg>
+
+				{/* {expanded ? (
 					<Image alt="" src={ArrowUp} />
 				) : (
 					<Image alt="" src={ArrowDown} />
-				)}
+				)} */}
 			</button>
 			<ul
 				className={classNames({
