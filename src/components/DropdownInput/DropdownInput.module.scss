@@ -1,6 +1,6 @@
 @import "../../styles/variables.scss";
 
-.text_input {
+.dropdown {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -13,7 +13,11 @@
 		color: $color-white;
 	}
 
-	input {
+	&_input {
+		cursor: pointer;
+
+		display: block;
+
 		font-weight: 400;
 
 		transition: 0.2s;
@@ -21,24 +25,6 @@
 
 		outline: none;
 		width: 100%;
-
-		&.default {
-			font-size: 20px;
-			line-height: 24px;
-
-			border: 1px solid $color-gray;
-			color: $color-white;
-			border-radius: 0.3em;
-			padding: 0.4em 0.6em;
-
-			&:hover:not(:focus) {
-				border: 1px solid $colot-light-gray;
-			}
-
-			&:focus {
-				background: $color-gray;
-			}
-		}
 
 		&.small {
 			font-size: 16px;
@@ -48,7 +34,11 @@
 			background: $colot-dark-gray;
 			color: $color-white;
 			border-radius: 1em;
-			padding: 7px 36px 7px 12px;
+			padding: 7px 12px;
+
+			&::placeholder {
+				color: $color-white;
+			}
 
 			&:hover:not(:focus) {
 				border: 1px solid $color-gray;
@@ -68,25 +58,51 @@
 				border: 1px solid #ff8d8d;
 			}
 		}
-
 		~ button {
 			position: absolute;
 			right: 12px;
 			bottom: 0;
-			transform: translateY(-58%);
+			transform: translateY(-70%);
 			background: transparent;
 			border: none;
-			cursor: pointer;
+		}
+	}
 
-			svg path {
-				transition: all 0.2s;
-			}
+	input {
+		cursor: auto;
+	}
+
+	.show_options {
+		z-index: 100;
+		display: block;
+		position: absolute;
+		top: calc(5px + 100%);
+		width: 100%;
+
+		list-style: none;
+
+		background: $colot-dark-gray;
+		border-radius: 6px;
+
+		display: flex;
+		flex-direction: column;
+		padding: 4px;
+		gap: 2px;
+
+		li {
+			cursor: pointer;
+			padding: 5px;
+			border-radius: 4px;
+
+			transition: 0.2s;
 
 			&:hover {
-				svg path {
-					fill: #b3b3b3;
-				}
+				background: #323237;
 			}
 		}
+	}
+
+	.hide_options {
+		display: none;
 	}
 }

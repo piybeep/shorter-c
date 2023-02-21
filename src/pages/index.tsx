@@ -7,6 +7,8 @@ import { TextInput, Button, ErrorView } from "@/components";
 import Resultat from "@/modules/Resultat";
 import { FooterModule } from "@/modules/Footer";
 import { HeaderModule } from "@/modules/Header";
+import { DropdownInput } from "@/components/DropdownInput";
+import { Options, OptionsProps } from "@/modules/Options";
 
 export default function Home() {
 	const { send, data, isLoading, error } = useShortLink();
@@ -41,16 +43,36 @@ export default function Home() {
 		send(userInput);
 		recaptchaRef?.current.reset();
 	};
-	const optionButtons = [
+	const optionButtons: OptionsProps["buttons"] = [
 		{
 			label: "Время жизни",
 			type: "dropdown",
 			default: "Не ограничено",
+			options: [
+				"Не ограничено",
+				"5 минут",
+				"Час",
+				"День",
+				"Месяц",
+				"Полгода",
+				"Год",
+			],
 		},
 		{
 			label: "Переходы",
 			type: "dropdown",
-			default: "Сколько угодно",
+			default: "Не ограничено",
+			userInput: true,
+			options: [
+				"Не ограничено",
+				"1",
+				"5",
+				"20",
+				"50",
+				"100",
+				"500",
+				"1000",
+			],
 		},
 		{
 			label: "Ссылка с паролем",
@@ -92,7 +114,7 @@ export default function Home() {
 						/>
 					</div>
 					<div className="form_row form_options">
-						{optionButtons.map((btn) => {
+						{/* {optionButtons.map((btn) => {
 							switch (btn.type) {
 								case "text": {
 									return (
@@ -106,9 +128,11 @@ export default function Home() {
 								}
 								case "dropdown": {
 									return (
-										<TextInput
+										<DropdownInput
 											label={btn.label}
-											htmlType="text"
+											options={btn.options!}
+											select={btn.active!}
+											setSelect={(id: string) => }
 											placeholder={btn.default}
 											type="small"
 										/>
@@ -118,7 +142,8 @@ export default function Home() {
 									return <></>;
 								}
 							}
-						})}
+						})} */}
+						<Options buttons={optionButtons} />
 					</div>
 				</form>
 				<ErrorView error={errorMessage} />
