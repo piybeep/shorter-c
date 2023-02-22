@@ -13,6 +13,7 @@ export function TextInput({
 	...props
 }: TextInputProps) {
 	const [showPass, setShowPass] = React.useState(false);
+	console.log(error);
 
 	return (
 		<div className={classNames(s.text_input, props.className)}>
@@ -20,7 +21,7 @@ export function TextInput({
 			<input
 				id={label}
 				className={classNames(s[type], {
-					[s.text_input__error]: error,
+					[s.text_input__error]: !!error.length,
 				})}
 				type={showPass ? "text" : htmlType}
 				{...props}

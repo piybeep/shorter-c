@@ -7,7 +7,6 @@ import { TextInput, Button, ErrorView } from "@/components";
 import Resultat from "@/modules/Resultat";
 import { FooterModule } from "@/modules/Footer";
 import { HeaderModule } from "@/modules/Header";
-import { DropdownInput } from "@/components/DropdownInput";
 import { Options, OptionsProps } from "@/modules/Options";
 
 export default function Home() {
@@ -21,7 +20,7 @@ export default function Home() {
 		if (userInput.trim() == "") {
 			return setErrorMessage("Вы не ввели ссылку");
 		}
-
+		send(userInput);
 		recaptchaRef.current.execute();
 	};
 
@@ -104,7 +103,6 @@ export default function Home() {
 							}}
 							onBlur={() => setErrorMessage("")}
 							value={userInput}
-							htmlType="url"
 							placeholder="Вставьте вашу ссылку сюда"
 						/>
 						<Button
@@ -113,38 +111,9 @@ export default function Home() {
 							disabled={isLoading}
 						/>
 					</div>
-					<div className="form_row form_options">
-						{/* {optionButtons.map((btn) => {
-							switch (btn.type) {
-								case "text": {
-									return (
-										<TextInput
-											label={btn.label}
-											htmlType="text"
-											placeholder={btn.placeholder}
-											type="small"
-										/>
-									);
-								}
-								case "dropdown": {
-									return (
-										<DropdownInput
-											label={btn.label}
-											options={btn.options!}
-											select={btn.active!}
-											setSelect={(id: string) => }
-											placeholder={btn.default}
-											type="small"
-										/>
-									);
-								}
-								default: {
-									return <></>;
-								}
-							}
-						})} */}
+					{/* <div className="form_row form_options">
 						<Options buttons={optionButtons} />
-					</div>
+					</div> */}
 				</form>
 				<ErrorView error={errorMessage} />
 				<Resultat isLoading={isLoading} response={data} />

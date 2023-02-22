@@ -4,30 +4,25 @@ import Link from "next/link";
 import Router from "next/router";
 import React from "react";
 
-export default function RedirectPage({ code }: { code: string }) {
-	const [error, setError] = React.useState("");
-	React.useEffect(() => {
-		axios
-			.get(`https://shrt.piybeep.com/api/tokens/${code}`)
-			.then((response) => {
-				Router.replace(
-					response.data?.url.startsWith("http")
-						? response.data?.url
-						: `http://${response.data?.url}`
-				);
-			})
-			.catch((err) => {
-				if (err?.response?.status == 404) {
-					setError("Данная ссылка никуда не ведёт");
-				} else {
-					console.error(err);
-					setError(
-						"Произошла ошибка. Повторите попытку или обратитесь к администатору. Приносим свои извинения!"
-					);
-				}
-			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+export default function RedirectPage({
+	originalUrl,
+	hashedPassword,
+	error,
+}: {
+	originalUrl: string;
+	hashedPassword?: string;
+	error?: any;
+}) {
+	/* if (hashedPassword) {
+		const userPassword = prompt(
+			"Переход по данной ссылке возможен только по паролю",
+			""
+		);
+
+		if (!userPassword) {
+			error = "Вы не ввели пароль";
+		}
+	} */
 
 	if (error) {
 		return (
@@ -53,11 +48,11 @@ export async function getServerSideProps(context: any) {
 			const response = await axios.get(
 				`https://shrt.piybeep.com/api/tokens/${context.query.code}`
 			);
-			if (response.data?.url) {
+			if (response.data?.originalUrl) {
 				res.writeHead(302, {
-					Location: response.data?.url.startsWith("http")
-						? response.data?.url
-						: `http://${response.data?.url}`,
+					Location: response.data?.originalUrl.startsWith("http")
+						? response.data?.originalUrl
+						: `http://${response.data?.originalUrl}`,
 				});
 				res.end();
 			}
@@ -77,7 +72,9 @@ export async function getServerSideProps(context: any) {
 
 	return {
 		props: {
-			code: context.query.code,
+			originalUrl: context.query.originalUrl,
+			hashedPassword: context.query.hashedPassword,
+			error: null,
 		},
 	};
 }

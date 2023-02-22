@@ -62,13 +62,6 @@
 			}
 		}
 
-		&__error {
-			&,
-			&:hover:not(:focus) {
-				border: 1px solid #ff8d8d;
-			}
-		}
-
 		~ button {
 			position: absolute;
 			right: 12px;
@@ -87,6 +80,13 @@
 					fill: #b3b3b3;
 				}
 			}
+		}
+	}
+
+	&__error {
+		&,
+		&:hover:not(:focus) {
+			border: 1px solid #ff8d8d !important;
 		}
 	}
 }
