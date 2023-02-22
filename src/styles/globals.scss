@@ -68,7 +68,7 @@ main {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		max-width: 44rem;
+		max-width: 50rem;
 		row-gap: 2rem;
 
 		.form {
@@ -80,7 +80,7 @@ main {
 				&.form_options {
 					width: 100%;
 					* {
-						max-width: 10.75rem;
+						max-width: 12.75rem;
 					}
 				}
 			}
@@ -88,10 +88,14 @@ main {
 	}
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 480px) {
 	main {
 		.user_input {
-			flex-direction: column;
+			.form {
+				&_row {
+					flex-direction: column;
+				}
+			}
 		}
 	}
 }

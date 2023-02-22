@@ -89,17 +89,11 @@ export function DropdownInput({
 					<path
 						d="M1.33325 1.5L5.33325 5.5L9.33325 1.5"
 						stroke="#909090"
-						stroke-width="1.3"
-						stroke-linecap="round"
-						stroke-linejoin="round"
+						strokeWidth="1.3"
+						strokeLinecap="round"
+						strokeLinejoin="round"
 					/>
 				</svg>
-
-				{/* {expanded ? (
-					<Image alt="" src={ArrowUp} />
-				) : (
-					<Image alt="" src={ArrowDown} />
-				)} */}
 			</button>
 			<ul
 				className={classNames({
